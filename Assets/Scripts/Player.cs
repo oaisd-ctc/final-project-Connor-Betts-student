@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-[SerializeField] float walkspeed = 5.0f;
-
+[SerializeField] float Walkspeed = 5f;
 
 
 
     void Start()
     {
-        
+        GetComponent<Rigidbody2D>();
     }
 
     void Update()
