@@ -38,6 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Distant Background
+    uniqueID: 3803024769
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4147801279
+    locked: 0
+  - name: Background Details
+    uniqueID: 981028937
+    locked: 0
+  - name: Player
+    uniqueID: 14165199
+    locked: 0
+  - name: Ground
+    uniqueID: 417762671
     locked: 0
