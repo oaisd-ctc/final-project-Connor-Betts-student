@@ -7,13 +7,20 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float runSpeed = 10f;
     [SerializeField] float jumpSpeed = 5f;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform gun;
     Vector2 moveInput;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeetCollider;
     bool isAlive = true;
+    AudioPlayer audioPlayer;
 
+    void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
 
     void Start()
     {
@@ -29,6 +36,13 @@ public class PlayerMovement : MonoBehaviour
         Run();
         FlipSprite();
         Die();
+    }
+
+    void OnFire(InputValue value)
+    {
+        if (!isAlive) { return; }
+        Instantiate(bullet, gun.position, transform.rotation);
+        audioPlayer.PlayerShootingClip();
     }
 
     void OnMove(InputValue value)
@@ -73,10 +87,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Die()
     {
-        if(myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards")))
+        if (myBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards")))
         {
             isAlive = false;
             myAnimator.SetTrigger("Death");
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 }
